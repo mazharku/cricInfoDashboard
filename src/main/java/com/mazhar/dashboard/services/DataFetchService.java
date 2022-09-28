@@ -1,9 +1,7 @@
 package com.mazhar.dashboard.services;
 
 import com.mazhar.dashboard.model.CricInfoDataModel;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
+import com.mazhar.dashboard.model.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +10,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 
 @Service
@@ -26,11 +27,12 @@ public class DataFetchService {
         try {
             ResponseEntity<String> models = restTemplate.getForEntity(url, String.class);
             String xmlString = models.getBody();
-            JAXBContext jaxbContext = JAXBContext.newInstance(CricInfoDataModel.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Root.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
             StringReader reader = new StringReader(xmlString);
-            CricInfoDataModel dataModel = (CricInfoDataModel) unmarshaller.unmarshal(reader);
+            Root dataModel = (Root) unmarshaller.unmarshal(reader);
+            dataModel.getChannel();
         } catch (RestClientException | JAXBException e) {
             e.printStackTrace();
         }

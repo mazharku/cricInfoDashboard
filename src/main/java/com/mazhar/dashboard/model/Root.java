@@ -9,19 +9,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @NoArgsConstructor
 @Getter
 @Setter
-@XmlRootElement(name = "item")
+@XmlRootElement(name = "rss")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InfoItem {
+public class Root {
+    @XmlElement(name = "channel")
+    private CricInfoDataModel channel;
     @XmlElement
-    private String title;
-    @XmlElement
-    private String link;
-    @XmlElement
-    private String description;
-    @XmlElement
-    private String guid;
+    private Integer version;
 }

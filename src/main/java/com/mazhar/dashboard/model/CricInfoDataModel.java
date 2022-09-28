@@ -1,22 +1,25 @@
 package com.mazhar.dashboard.model;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @XmlRootElement(name = "channel")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CricInfoDataModel {
     @XmlElement
     private String title;
     @XmlElement
-    private String ttl;
+    private Integer ttl;
     @XmlElement
     private String link;
     @XmlElement
@@ -27,7 +30,7 @@ public class CricInfoDataModel {
     private String language;
     @XmlElement
     private String pubDate;
-    @XmlElement
+    @XmlElement(name = "item")
     private List<InfoItem> items;
 
 }
